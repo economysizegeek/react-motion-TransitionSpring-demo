@@ -1,12 +1,6 @@
-/// <reference path="./types.d.ts" />
-
 "use strict";
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /// <reference path="./types.d.ts" />
 
 var _react = require("react");
 
@@ -14,13 +8,17 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMotion = require("react-motion");
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var reorderKeys = _reactMotion.utils.reorderKeys;
 
-var update = _react2["default"].addons;
 
-var Demo = _react2["default"].createClass({
+var update = _react2.default.addons;
+
+var Demo = _react2.default.createClass({
   displayName: "Demo",
-
   getInitialState: function getInitialState() {
     return {
       // Apparently Object.keys return keys in insertion order (except for 1,2,3).
@@ -31,11 +29,9 @@ var Demo = _react2["default"].createClass({
       }
     };
   },
-
   componentDidMount: function componentDidMount() {
     window.addEventListener("keyup", this.handleKeyup);
   },
-
   handleKeyup: function handleKeyup(e) {
     var keyCode = e.keyCode;
 
@@ -45,6 +41,7 @@ var Demo = _react2["default"].createClass({
 
     var letter = "#" + String.fromCharCode(e.keyCode);
     var letters = this.state.letters;
+
 
     var hasLetter = letters[letter];
 
@@ -64,7 +61,6 @@ var Demo = _react2["default"].createClass({
 
     this.setState({ letters: newLetters });
   },
-
   toggle: function toggle(letter) {
     var selected = this.state.letters[letter];
 
@@ -72,6 +68,7 @@ var Demo = _react2["default"].createClass({
       letters: _extends({}, this.state.letters, _defineProperty({}, letter, !selected))
     });
   },
+
 
   // TransitionSpring Methods
 
@@ -90,7 +87,6 @@ var Demo = _react2["default"].createClass({
 
     return values;
   },
-
   willEnter: function willEnter(key) {
     return {
       width: { val: 0 },
@@ -98,7 +94,6 @@ var Demo = _react2["default"].createClass({
       scale: { val: 0 }
     };
   },
-
   willLeave: function willLeave(key) {
     return {
       width: { val: 0 },
@@ -106,20 +101,20 @@ var Demo = _react2["default"].createClass({
       scale: { val: 0 }
     };
   },
-
   render: function render() {
     var _this = this;
 
     var letters = this.state.letters;
 
-    return _react2["default"].createElement(
+
+    return _react2.default.createElement(
       _reactMotion.TransitionSpring,
       {
         endValue: this.getEndValue(),
         willEnter: this.willEnter,
         willLeave: this.willLeave },
       function (values) {
-        return _react2["default"].createElement(
+        return _react2.default.createElement(
           "div",
           { className: "letters" },
           Object.keys(values).map(function (letter) {
@@ -139,7 +134,7 @@ var Demo = _react2["default"].createClass({
               borderRadius: widthValue
             };
 
-            return _react2["default"].createElement(
+            return _react2.default.createElement(
               "span",
               {
                 key: letter,
@@ -159,25 +154,25 @@ function isAlphaNumeric(keyCode) {
   return 48 <= keyCode && keyCode <= 57 || 65 <= keyCode && keyCode <= 90;
 }
 
-var app = _react2["default"].createElement(
+var app = _react2.default.createElement(
   "div",
   { className: "container" },
-  _react2["default"].createElement(Demo, null),
-  _react2["default"].createElement(
+  _react2.default.createElement(Demo, null),
+  _react2.default.createElement(
     "h3",
     { className: "help" },
     "press any key"
   ),
-  _react2["default"].createElement(
+  _react2.default.createElement(
     "h3",
     { className: "colophon" },
     "made with ",
-    _react2["default"].createElement(
+    _react2.default.createElement(
       "a",
       { href: "https://github.com/chenglou/react-motion" },
       "react motion."
     ),
-    _react2["default"].createElement(
+    _react2.default.createElement(
       "a",
       { href: "https://github.com/hayeah/react-motion-TransitionSpring-demo/blob/master/app.jsx" },
       "source."
@@ -185,4 +180,4 @@ var app = _react2["default"].createElement(
   )
 );
 
-_react2["default"].render(app, document.querySelector('#content'));
+_react2.default.render(app, document.querySelector('#content'));
