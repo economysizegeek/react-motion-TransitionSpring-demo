@@ -6,14 +6,15 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require("react-dom");
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _reactMotion = require("react-motion");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var reorderKeys = _reactMotion.utils.reorderKeys;
-
 
 var update = _react2.default.addons;
 
@@ -54,10 +55,6 @@ var Demo = _react2.default.createClass({
     } else {
       newLetters[letter] = true;
     }
-
-    newLetters = reorderKeys(newLetters, function (keys) {
-      return keys.sort();
-    });
 
     this.setState({ letters: newLetters });
   },
@@ -180,4 +177,4 @@ var app = _react2.default.createElement(
   )
 );
 
-_react2.default.render(app, document.querySelector('#content'));
+_reactDom2.default.render(app, document.querySelector('#content'));

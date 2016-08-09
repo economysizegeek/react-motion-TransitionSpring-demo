@@ -1,9 +1,10 @@
 /// <reference path="./types.d.ts" />
 
 import React from "react";
+import ReactDOM from 'react-dom'
+
 import {TransitionSpring,Spring,utils as RMutils} from "react-motion";
 
-const {reorderKeys} = RMutils;
 
 const update = React.addons;
 
@@ -46,7 +47,6 @@ let Demo = React.createClass({
       newLetters[letter] = true;
     }
 
-    newLetters = reorderKeys(newLetters,keys => keys.sort());
 
     this.setState({letters: newLetters});
   },
@@ -151,4 +151,4 @@ const app = (
   </div>
 );
 
-React.render(app, document.querySelector('#content'));
+ReactDOM.render(app, document.querySelector('#content'));
