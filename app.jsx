@@ -8,22 +8,12 @@ import {TransitionSpring,Spring,utils as RMutils} from "react-motion";
 
 const update = React.addons;
 
-let Demo = React.createClass({
-  getInitialState() {
-    return {
-      // Apparently Object.keys return keys in insertion order (except for 1,2,3).
-      letters: {
-        "#A": true,
-        "#N": true,
-        "#T": true,
-      },
-    };
-  },
+class Demo extends React.Component {
 
   componentDidMount() {
     window.addEventListener("keyup",this.handleKeyup)
 
-  },
+  }
 
   handleKeyup(e) {
     const {keyCode} = e;
@@ -32,7 +22,7 @@ let Demo = React.createClass({
     }
 
     const letter = `#${String.fromCharCode(e.keyCode)}`;
-    const {letters} = this.state;
+    const {letters} = this.props;
 
 
     const hasLetter = letters[letter];
@@ -49,25 +39,25 @@ let Demo = React.createClass({
 
 
     this.setState({letters: newLetters});
-  },
+  }
 
   toggle(letter) {
-    const selected = this.state.letters[letter];
+    const selected = this.props.letters[letter];
 
     this.setState({
       letters: {
-        ...this.state.letters,
+        ...this.props.letters,
         [letter]: !selected,
       },
     });
-  },
+  }
 
   // TransitionSpring Methods
 
   getEndValue() {
     let values = {};
 
-    Object.keys(this.state.letters).forEach(key => {
+    Object.keys(this.props.letters).forEach(key => {
       values[key] = {
         width: {val: 50},
         scale: {val: 1},
@@ -78,7 +68,7 @@ let Demo = React.createClass({
     console.log(values);
 
     return values;
-  },
+  }
 
   willEnter(key) {
     return {
@@ -86,7 +76,7 @@ let Demo = React.createClass({
       margin: {val: 0},
       scale: {val: 0},
     }
-  },
+  }
 
   willLeave(key) {
     return {
@@ -94,10 +84,10 @@ let Demo = React.createClass({
       margin: {val: 0},
       scale: {val: 0},
     }
-  },
+  }
 
   render() {
-    const {letters} = this.state;
+    const {letters} = this.props;
 
     return (
       <TransitionSpring
@@ -134,7 +124,18 @@ let Demo = React.createClass({
       </TransitionSpring>
     );
   }
-});
+};
+Demo.propTypes ={ 
+    letters: React.PropTypes.object
+};
+
+Demo.defaultProps = {
+  letters: {
+        "#A": true,
+        "#N": true,
+        "#T": true,
+  }
+};
 
 function isAlphaNumeric(keyCode) {
   return (48 <= keyCode && keyCode <= 57) || (65 <= keyCode && keyCode <= 90);
